@@ -11,6 +11,11 @@ ___________________________________
 
 ___________________________________
 
+**How to**
+
+If you want just to use app and not to work with source code you can download it [here](https://drive.google.com/file/d/1Xv76stF2M7_f2P-KpkSNrF3Wl4ncsRul/view?usp=sharing)
+___________________________________
+
 **Source code.**
 
 If you want to use source code (uncompiled file) you need to install some modules:
