@@ -27,7 +27,7 @@ Here is a command to install them all!
 
 ```pip install yt-dlp pillow tkinter```
 
-̶F̶F̶M̶p̶e̶g̶ ̶a̶l̶s̶o̶ ̶r̶e̶q̶u̶i̶r̶e̶d̶!̶  It is not required now.
+̶F̶F̶M̶p̶e̶g̶ ̶a̶l̶s̶o̶ ̶r̶e̶q̶u̶i̶r̶e̶d̶!̶    It is not required now.
 
 ___________________________________
 
