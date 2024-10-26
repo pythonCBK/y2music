@@ -13,7 +13,7 @@ ___________________________________
 
 **How to**
 
-If you want just to use app and not to work with source code you can download it [here](https://drive.google.com/file/d/1Xv76stF2M7_f2P-KpkSNrF3Wl4ncsRul/view?usp=sharing)
+If you want just to use app and not to work with source code you can download it [here](https://drive.google.com/file/d/1Xv76stF2M7_f2P-KpkSNrF3Wl4ncsRul/view?usp=sharing).
 ___________________________________
 
 **Source code.**
@@ -27,7 +27,7 @@ Here is a command to install them all!
 
 ```pip install yt-dlp pillow tkinter```
 
-FFMpeg also required!
+̶F̶F̶M̶p̶e̶g̶ ̶a̶l̶s̶o̶ ̶r̶e̶q̶u̶i̶r̶e̶d̶!̶  It is not required now.
 
 ___________________________________
 
