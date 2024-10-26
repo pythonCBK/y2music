@@ -128,7 +128,7 @@ github_photo = ImageTk.PhotoImage(github_image)
 btn_github = Button(frame_info, image=github_photo, bg='#2B2D31', relief='flat', command=github)
 btn_github.place(relx=0.5, y=230, anchor='n')
 
-txt_upd = Label(frame_info, text='ver. 1.0', font=("Lucida Console", 11), bg='#2B2D31', fg='white')
+txt_upd = Label(frame_info, text='ver. 1.1', font=("Lucida Console", 11), bg='#2B2D31', fg='white')
 txt_upd.place(relx=0.15, y=333, anchor='n')
 
 txt_information = Label(frame_info, text='By CBK', font=("Lucida Console", 11), bg='#2B2D31', fg='white')
