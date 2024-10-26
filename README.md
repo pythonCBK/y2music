@@ -22,6 +22,8 @@ Here is a command to install them all!
 
 ```pip install yt-dlp pillow tkinter```
 
+FFMpeg also required!
+
 ___________________________________
 
 **Attention!**
