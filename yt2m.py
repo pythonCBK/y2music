@@ -35,6 +35,7 @@ center_window(window, window_width, window_height)
 format_choice = StringVar(value="audio")
 
 
+
 # -------- Functions -------- #
 
 # Open gitHub Page Function
@@ -76,6 +77,7 @@ def download_file(url):
             'format': 'bestvideo+bestaudio/best',  
             'outtmpl': os.path.join(os.path.expanduser('~/Downloads'), '%(title)s.%(ext)s'),
         }
+
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
@@ -196,5 +198,8 @@ txt_ver.place(relx=0.17, y=345, anchor='n')
 # Author
 txt_author = Label(frame_info, text='by CBK', font=("Lucida Console", 11), bg='#2B2D31', fg='white')
 txt_author.place(relx=0.85, y=345, anchor='n')
+
+
+
 
 window.mainloop()
