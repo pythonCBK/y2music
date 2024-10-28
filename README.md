@@ -13,7 +13,9 @@ ___________________________________
 
 ❔**How to**
 
-If you want just to use app and not to work with source code you can download it [here](https://drive.google.com/file/d/1Xv76stF2M7_f2P-KpkSNrF3Wl4ncsRul/view?usp=sharing).
+If you want just to use app and not to work with source code you can download it. [Download exe file.](https://drive.google.com/file/d/11YqCwTusFnmLSHCpgsij5oMiorFZJ1vo/view?usp=sharing)
+
+Installer is also available! [Download setup file.](https://drive.google.com/file/d/1UbeJI_VLLhRJSwrNZRWmPnKuojraZ_kx/view?usp=sharing)
 ___________________________________
 
 📃**Source code**
