@@ -5,9 +5,9 @@ Y2M is very simple in use app for downloading audio from YouTube videos in MP3 f
 ___________________________________
 
 ✳️**Features.**
-1. You can download audio in 192 kbps format!
-2. Easy in use!
-3. It is open source! :D
+1. You can download audio and video in in the best available quality!
+3. Easy in use!
+4. It is open source! :D
 
 ___________________________________
 
@@ -20,14 +20,11 @@ ___________________________________
 
 If you want to use source code (uncompiled file) you need to install some modules:
 1. yt-dlp
-2. pillow
-3. tkinter
+2. tkinter
 
 Here is a command to install them all!
 
 ```pip install yt-dlp pillow tkinter```
-
-̶F̶F̶M̶p̶e̶g̶ ̶a̶l̶s̶o̶ ̶r̶e̶q̶u̶i̶r̶e̶d̶!  It is not required now.
 
 ___________________________________
 
