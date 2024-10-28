@@ -35,7 +35,6 @@ center_window(window, window_width, window_height)
 format_choice = StringVar(value="audio")
 
 
-
 # -------- Functions -------- #
 
 # Open gitHub Page Function
@@ -77,7 +76,6 @@ def download_file(url):
             'format': 'bestvideo+bestaudio/best',  
             'outtmpl': os.path.join(os.path.expanduser('~/Downloads'), '%(title)s.%(ext)s'),
         }
-
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
