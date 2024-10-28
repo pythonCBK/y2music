@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 ### Will be added
 
 - Function to choose the quality for audion and video.
+- Multithreading.
 
 
 ### Fill be fixed
