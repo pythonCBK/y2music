@@ -9,12 +9,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 ### Will be added
 
 - Function to choose the quality for audion and video.
-- Multithreading.
 
-
-### Fill be fixed
+### Will be fixed
 
 - A bug with the keyboard layout.
+
+
+## [1.2] - 2024-10-28
+
+### Added
+
+- Multithreading.
+
+### Fixed
+- Program freezes (fixed with multithreading).
+
 
 ## [1.1] - 2024-10-28
 
