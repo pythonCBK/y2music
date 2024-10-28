@@ -1,17 +1,17 @@
-📖**ReadME**
+📖**ReadME!**
 
 Y2M is very simple in use app for downloading audio from YouTube videos in MP3 file. App allows you to quickly and easily get audio files from videos by saving them in the Downloads folder. In the future I plan to make it available for download in mp4 format!
 
 ___________________________________
 
-✳️**Features.**
+✳️**Features!**
 1. You can download audio and video in in the best available quality!
 3. Easy in use!
 4. It is open source! :D
 
 ___________________________________
 
-❔**How to**
+❔**How to?**
 
 If you want just to use app and not to work with source code you can download it [here](https://drive.google.com/file/d/1Xv76stF2M7_f2P-KpkSNrF3Wl4ncsRul/view?usp=sharing).
 ___________________________________
