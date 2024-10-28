@@ -3,6 +3,7 @@ from tkinter import *
 import yt_dlp
 import webbrowser
 import sys
+import threading
 
 # Window
 window = Tk()
@@ -13,7 +14,7 @@ window.title('Y2M')
 if hasattr(sys, '_MEIPASS'):
     icon_path = os.path.join(sys._MEIPASS, 'appicon.ico')
 else:
-    icon_path = "C:\\Users\\cat12\\OneDrive\\Desktop\\yt2m 1.1\\appicon.ico"
+    icon_path = "C:\\Users\\cat12\\OneDrive\\Desktop\\Y2M\\yt2m 1.2\\appicon.ico"
 
 window.iconbitmap(icon_path)
 
@@ -54,11 +55,16 @@ def info_btn():
 
 # Download function
 def download():
+    error_label.config(text="Please wait...")
     url = inp_entry.get()
     if not url:
         error_label.config(text="Enter the link!")
         return
+    
+    download_thread = threading.Thread(target=download_file, args=(url,))
+    download_thread.start()
 
+def download_file(url):
     format_choice_value = format_choice.get()
 
     if format_choice_value == "audio":
@@ -186,7 +192,7 @@ btn_back = Button(frame_info, text='back', bg='#2B2D31', fg='white', relief='fla
 btn_back.place(relx=0.5, y=345, anchor='n')
 
 # Version
-txt_ver = Label(frame_info, text='ver. 1.1', font=("Lucida Console", 11), bg='#2B2D31', fg='white')
+txt_ver = Label(frame_info, text='ver. 1.2', font=("Lucida Console", 11), bg='#2B2D31', fg='white')
 txt_ver.place(relx=0.17, y=345, anchor='n')
 
 # Author
