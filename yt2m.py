@@ -1,14 +1,23 @@
 import os
-import sys
 from tkinter import *
 import yt_dlp
 import webbrowser
-from PIL import Image, ImageTk
+import sys
 
-def resource_path(relative_path):
-    base_path = os.path.dirname(os.path.abspath(__file__))
-    return os.path.join(base_path, relative_path)
+# Window
+window = Tk()
+window['bg'] = '#2B2D31'
+window.title('Y2M')
 
+# Icon
+if hasattr(sys, '_MEIPASS'):
+    icon_path = os.path.join(sys._MEIPASS, 'appicon.ico')
+else:
+    icon_path = "C:\\Users\\cat12\\OneDrive\\Desktop\\yt2m 1.1\\appicon.ico"
+
+window.iconbitmap(icon_path)
+
+# Window location
 def center_window(window, width, height):
     screen_width = window.winfo_screenwidth()
     screen_height = window.winfo_screenheight()
@@ -16,125 +25,172 @@ def center_window(window, width, height):
     y = (screen_height - height) // 2
     window.geometry(f'{width}x{height}+{x}+{y}')
 
-window = Tk()
-window['bg'] = '#2B2D31'
-window.title('Y2M')
-
-icon_path = resource_path("appicon.ico")
-try:
-    window.iconbitmap(icon_path)
-except Exception as e:
-    print(f"Failed to set icon: {e}")
-
-window_width = 300
-window_height = 360
+window_width = 280
+window_height = 370
 window.resizable(width=False, height=False)
 center_window(window, window_width, window_height)
 
-#============= Audio Function ==============#
-
-def download_mp3(youtube_url):
-    try:
-        with yt_dlp.YoutubeDL({'quiet': True}) as ydl:
-            info_dict = ydl.extract_info(youtube_url, download=False)
-            video_title = info_dict.get('title', 'audio')
-        
-        # Путь к папке Downloads
-        downloads_folder = os.path.join(os.path.expanduser("~"), "Downloads")
-        output_file = os.path.join(downloads_folder, f"{video_title} [audio].webm")
-        
-        ydl_opts = {
-            'format': 'bestaudio/best',
-            'outtmpl': output_file,
-        }
-
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([youtube_url])
-
-        # Переименование файла в .mp3 (без конвертации)
-        renamed_file = output_file.replace(".webm", ".mp3")
-        if os.path.exists(output_file):
-            os.rename(output_file, renamed_file)
-            error_label.config(text="Audio was successfully saved\nin downloads folder.", font=("Lucida Console", 11))
-        else:
-            error_label.config(text="Failed to locate the downloaded file.", font=("Lucida Console", 11))
-    except Exception as e:
-        error_label.config(text=f"Error: {e}", font=("Lucida Console", 11))
+# Variables
+format_choice = StringVar(value="audio")
 
 
-def on_download():
-    youtube_link = inp_entry.get()
-    if youtube_link:
-        download_mp3(youtube_link)
-    else:
-        error_label.config(text=(f"Enter the link!"), font=("Lucida Console", 12))
 
-def info_btn():
-    frame_audio.pack_forget()
-    frame_info.pack(fill=BOTH, expand=True)
+# -------- Functions -------- #
 
-#=============== Audio Page ===============#
-
-frame_audio = Frame(window, bg='#2B2D31')
-frame_audio.pack(fill=BOTH, expand=True)
-
-title = Label(frame_audio, text='YouTube2Music',
-              font=("Lucida Console", 20), bg='#2B2D31', fg='white')
-title.place(relx=0.5, y=30, anchor='n')
-
-txt_entry = Label(frame_audio, text='Enter the link',
-                  font=("Lucida Console", 13), bg='#2B2D31', fg='white')
-txt_entry.place(relx=0.5, y=120, anchor='n')
-
-inp_entry = Entry(frame_audio, bg='#2F3136', fg='white', relief='flat', highlightthickness=0, borderwidth=0, insertbackground='white', font=("Lucida Console", 10))
-inp_entry.place(relx=0.5, y=147, anchor='n', width=182, height=30)
-
-btn_dwlnd = Button(frame_audio, text='Download', bg='#7289DA', fg='white', relief='flat', highlightthickness=0, borderwidth=0, font=("Lucida Console", 16), command=on_download)
-btn_dwlnd.place(relx=0.5, y=220, anchor='n')
-
-btn_info = Button(frame_audio, text='info', bg='#2B2D31', fg='white', relief='flat', highlightthickness=0, borderwidth=0, font=("Lucida Console", 12), command=info_btn)
-btn_info.place(relx=0.5, y=330, anchor='n')
-
-error_label = Label(frame_audio, text='',
-                    font=("Lucida Console", 12), bg='#2B2D31', fg='#a70606')
-error_label.place(relx=0.5, y=280, anchor='n')
-
-#=============== Info Functions ===============#
-
-def back_btn():
-    frame_info.pack_forget()
-    frame_audio.pack(fill=BOTH, expand=True)
-
+# Open gitHub Page Function
 def github():
     webbrowser.open("https://github.com/pythonCBK/y2music/")
 
-#=============== Info Page ===============#
+# Back Button Function
+def back_btn():
+    error_label.config(text="")
+    frame_info.pack_forget()
+    frame_main.pack(fill=BOTH, expand=True)
+
+# Info Button Function
+def info_btn():
+    frame_main.pack_forget()
+    frame_info.pack(fill=BOTH, expand=True)
+
+# Download function
+def download():
+    url = inp_entry.get()
+    if not url:
+        error_label.config(text="Enter the link!")
+        return
+
+    format_choice_value = format_choice.get()
+
+    if format_choice_value == "audio":
+        ydl_opts = {
+            'format': 'bestaudio/best',  
+            'outtmpl': os.path.join(os.path.expanduser('~/Downloads'), '%(title)s.%(ext)s'),  
+        }
+    else: 
+        ydl_opts = {
+            'format': 'bestvideo+bestaudio/best',  
+            'outtmpl': os.path.join(os.path.expanduser('~/Downloads'), '%(title)s.%(ext)s'),
+        }
+
+    try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([url])
+        error_label.config(text="File was successfully saved\nin downloads folder.")
+    except Exception as e:
+        error_label.config(text=f"Error: {str(e)}")
+
+def pink_mode(event=None):
+    error_label.config(text="You found me :3\nPink mode acivated!", fg='#f869d2')
+    btn_download.config(bg="#eb90d6")
+    btn_github.config(fg="#eb90d6")
+
+window.bind("<Control-Shift-C>", pink_mode)
+
+
+# -------- Main Page -------- #
+
+frame_main = Frame(window, bg='#2B2D31')
+frame_main.pack(fill=BOTH, expand=True)
+
+# ----- Up ----- #
+
+# Title Back
+fr_back = Frame(frame_main, bg='#26272b', width=300, height=60)
+fr_back.place(relx=0.5, y=26, anchor='center')
+
+# Title
+title = Label(frame_main, text='YouTube2Music',
+              font=("Lucida Console", 20, "bold"), bg='#26272b', fg='white')
+title.place(relx=0.5, y=15, anchor='n')
+
+# ----- Input Field ----- #
+
+# Clean Function
+def clean_entry():
+    inp_entry.delete(0, 'end')
+
+# Enter The Link Text
+txt_entry = Label(frame_main, text='Enter the link',
+                  font=("Lucida Console", 17), bg='#2B2D31', fg='white')
+txt_entry.place(relx=0.5, y=85, anchor='n')
+
+# Entry Field
+inp_entry = Entry(frame_main, bg='#2F3136', fg='white', relief='flat',
+                  highlightthickness=0, borderwidth=0, insertbackground='white',
+                  font=("Lucida Console", 12))
+inp_entry.place(relx=0.45, y=130, anchor='n', width=210, height=30)
+
+# Clean Button
+btn_clean = Button(frame_main, text='←', bg='#26272b', fg='white',
+                   relief='flat', highlightthickness=0, borderwidth=0, font=("Lucida Console", 16), command=clean_entry)
+btn_clean.place(relx=0.85, y=130, anchor='n', width=30, height=30)
+
+# ----- Format Choise ----- #
+
+# Audio Choice
+audio_button = Radiobutton(window, text="Audio",
+                           bg='#2B2D31', fg='white', relief='flat', highlightthickness=0,
+                           borderwidth=0, font=("Lucida Console", 13), variable=format_choice, value="audio", selectcolor='#26272b')
+audio_button.place(relx=0.32, y=180, anchor='n')
+
+# Video Choice
+video_button = Radiobutton(window, text="Video",
+                           bg='#2B2D31', fg='white', relief='flat', highlightthickness=0,
+                           borderwidth=0, font=("Lucida Console", 13), variable=format_choice, value="video", selectcolor='#26272b')
+video_button.place(relx=0.68, y=180, anchor='n')
+
+# ----- Down ----- #
+
+# Download Button
+btn_download = Button(frame_main, text='Download', bg='#7289DA', fg='white', relief='flat', highlightthickness=0, borderwidth=0, font=("Lucida Console", 16), command=download)
+btn_download.place(relx=0.5, y=225, anchor='n')
+
+# Error Label
+error_label = Label(frame_main, text='',
+                    font=("Lucida Console", 11), bg='#2B2D31', fg='#a70606')
+error_label.place(relx=0.5, y=280, anchor='n')
+
+# Info Button
+btn_info = Button(frame_main, text='info', bg='#2B2D31', fg='white', relief='flat', highlightthickness=0, borderwidth=0, font=("Lucida Console", 12), command=info_btn)
+btn_info.place(relx=0.5, y=345, anchor='n')
+
+
+
+# -------- Info Page -------- #
 
 frame_info = Frame(window, bg='#2B2D31')
 
-title = Label(frame_info, text='Information',
-              font=("Lucida Console", 24), bg='#2B2D31', fg='white')
-title.place(relx=0.5, y=30, anchor='n')
+# ----- Up ----- #
 
+# Title Back
+fr_back2 = Frame(frame_info, bg='#26272b', width=300, height=60)
+fr_back2.place(relx=0.5, y=26, anchor='center') # Центрирование Frame по горизонтали
+
+# Title
+title_info = Label(frame_info, text='Information',
+              font=("Lucida Console", 20, "bold"), bg='#26272b', fg='white')
+title_info.place(relx=0.5, y=15, anchor='n')
+
+# Info Text
 txt_information = Label(frame_info, 
-                        text='Hello! Thank you for\ndownloading Y2M! My app is\ncompletely free and open\nsource. You can find the\nsource code, more information,\nand support on my GitHub page.\nFeel free to ask anything!', 
-                        font=("Lucida Console", 11), bg='#2B2D31', fg='white')
-txt_information.place(relx=0.5, y=100, anchor='n')
+                        text='Hello! Thank you for\ndownloading Y2M! My app is\ncompletely free and open\nsource. You can find the\nsource code, more\ninformation, and support\non my GitHub page.\nFeel free to ask anything!', 
+                        font=("Lucida Console", 12), bg='#2B2D31', fg='white')
+txt_information.place(relx=0.5, y=90, anchor='n')
 
-github_image = Image.open(resource_path("github_logo.png"))
-github_image = github_image.resize((160, 65), Image.LANCZOS)
-github_photo = ImageTk.PhotoImage(github_image)
+# GitHub Button
+btn_github = Button(frame_info, text='GitHub', bg='#2B2D31', fg='white', relief='flat', highlightthickness=0, borderwidth=0, font=("Calibri", 45, "bold"), command=github)
+btn_github.place(relx=0.5, y=255, anchor='n', width=180, height=50)
 
-btn_github = Button(frame_info, image=github_photo, bg='#2B2D31', relief='flat', command=github)
-btn_github.place(relx=0.5, y=230, anchor='n')
+# Back Button
+btn_back = Button(frame_info, text='back', bg='#2B2D31', fg='white', relief='flat', highlightthickness=0, borderwidth=0, font=("Lucida Console", 12), command=back_btn)
+btn_back.place(relx=0.5, y=345, anchor='n')
 
-txt_upd = Label(frame_info, text='ver. 1.1', font=("Lucida Console", 11), bg='#2B2D31', fg='white')
-txt_upd.place(relx=0.15, y=333, anchor='n')
+# Version
+txt_ver = Label(frame_info, text='ver. 1.1', font=("Lucida Console", 11), bg='#2B2D31', fg='white')
+txt_ver.place(relx=0.17, y=345, anchor='n')
 
-txt_information = Label(frame_info, text='By CBK', font=("Lucida Console", 11), bg='#2B2D31', fg='white')
-txt_information.place(relx=0.85, y=332, anchor='n')
-
-btn_back = Button(frame_info, text='back', bg='#2B2D31', fg='white', relief='flat', highlightthickness=0, borderwidth=0, font=("Lucida Console", 13), command=back_btn)
-btn_back.place(relx=0.5, y=330, anchor='n')
+# Author
+txt_author = Label(frame_info, text='by CBK', font=("Lucida Console", 11), bg='#2B2D31', fg='white')
+txt_author.place(relx=0.85, y=345, anchor='n')
 
 window.mainloop()
