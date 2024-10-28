@@ -24,7 +24,7 @@ If you want to use source code (uncompiled file) you need to install some module
 
 Here is a command to install them all!
 
-```pip install yt-dlp pillow tkinter```
+```pip install yt-dlp tkinter```
 
 ___________________________________
 
