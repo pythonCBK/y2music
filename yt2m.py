@@ -14,7 +14,7 @@ window.title('Y2M')
 if hasattr(sys, '_MEIPASS'):
     icon_path = os.path.join(sys._MEIPASS, 'appicon.ico')
 else:
-    icon_path = "C:\\Users\\cat12\\OneDrive\\Desktop\\Y2M\\yt2m 1.2\\appicon.ico"
+    icon_path = "C:\\......\\yt2m 1.2\\appicon.ico" # <------------ Your path here
 
 window.iconbitmap(icon_path)
 
