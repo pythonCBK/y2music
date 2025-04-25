@@ -1,6 +1,6 @@
 ⚠️**Attention!**
 
-This project has been droppped due to the creation of a better and updated version, which you can find [HERE](https://github.com/pythonCBK/y2m-pocket). Thank you for understanding!
+This project has been archived due to the creation of a better and updated version, which you can find [HERE](https://github.com/pythonCBK/y2m-pocket). Thank you for understanding!
 
 ___________________________________
 
